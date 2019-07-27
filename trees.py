@@ -1,5 +1,23 @@
 from utils import *
-from nodes import *
+
+
+class Node:
+    def __init__(self, x=None, left=None, right=None):
+        self.val = x
+        self.left = left
+        self.right = right
+
+
+class BSNode(Node):
+    def __init__(self, x=None, left=None, right=None, parent=None):
+        super(BSNode, self).__init__(x, left, right)
+        self.parent = parent
+
+
+class RBNode(BSNode):
+    def __init__(self, x=None, left=None, right=None, parent=None, color='Black'):
+        super(RBNode, self).__init__(x, left, right, parent)
+        self.color = color
 
 
 class Tree:
@@ -386,15 +404,23 @@ class RBTree(BSTree):
 
 if __name__ == '__main__':
     print('=============== Example of Binary Search Tree ==============')
-
+    print('                              5                              \n'
+          '                             / \\                             \n'
+          '                            /   \\                            \n'
+          '                           3     7                           \n'
+          '                          / \\     \\                          \n'
+          '                         /   \\     \\                         \n'
+          '                        2     4     8                        \n'
+          '                       /                                     \n'
+          '                      /                                      \n'
+          '                     1                                       \n')
     items = [5, 3, 7, 2, 4, None, 8, 1]
-    print('     - Input:\n          ', str(items))
-
     tree = BSTree()
     tree.add_list(items)
+
+    print('     - Input:\n          ', str(items))
     print('     - Successor of 2 is: %d' % tree.get_successor(2).val)
     print('     - Predecessor of 7 is: %d' % tree.get_predecessor(7).val)
-
     print('     - Layer Order Tree Walk:\n          ', str(tree.layer_order_tree_walk()))
     print('     - Post Order Tree Walk:\n          ', str(tree.postorder_tree_walk_stack()))
     print('     - Pre Order Tree Walk:\n          ', str(tree.preorder_tree_walk_stack()))
